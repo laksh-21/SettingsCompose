@@ -1,4 +1,4 @@
-package com.example.datastoresettings.uiComponents
+package com.example.datastoresettings.uiComponents.internalComponents
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,7 +23,7 @@ internal fun RowScope.SettingDescription(
         verticalArrangement = Arrangement.Center,
     ) {
         title()
-        if (summary != null) {
+        summary?.let {
             summary()
         }
     }
