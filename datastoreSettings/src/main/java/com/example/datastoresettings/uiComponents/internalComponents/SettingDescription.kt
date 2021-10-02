@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.LocalContentColor
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -34,6 +35,7 @@ internal fun DefaultTitleText(title: String) {
     Text(
         text = title,
         maxLines = 1,
+        style = MaterialTheme.typography.body1
     )
 }
 
@@ -42,5 +44,6 @@ internal fun DefaultSummaryText(summary: String) {
     Text(
         text = summary,
         color = LocalContentColor.current.copy(alpha = ContentAlpha.medium),
+        style = MaterialTheme.typography.subtitle1
     )
 }
