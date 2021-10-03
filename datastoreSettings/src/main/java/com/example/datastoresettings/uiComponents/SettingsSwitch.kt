@@ -19,7 +19,7 @@ import com.example.datastoresettings.uiComponents.internalComponents.SettingDesc
 import com.example.datastoresettings.uiComponents.internalComponents.SettingIcon
 
 @Composable
-fun SettingsSwitch(
+internal fun SettingsSwitchComponent(
     modifier: Modifier = Modifier,
     title: String,
     summary: String? = null,
@@ -51,7 +51,7 @@ fun SettingsSwitch(
 }
 
 @Composable
-fun SettingsSwitch(
+internal fun SettingsSwitchComponent(
     modifier: Modifier = Modifier,
     title: @Composable () -> Unit,
     summary: @Composable (() -> Unit)? = null,
@@ -81,7 +81,7 @@ fun SettingsSwitch(
 @Preview(showBackground = true)
 @Composable
 fun BasicSwitch() {
-    SettingsSwitch(
+    SettingsSwitchComponent(
         title = "Hello!",
         summary = "Summary..",
         icon = Icons.Filled.ArrowBack

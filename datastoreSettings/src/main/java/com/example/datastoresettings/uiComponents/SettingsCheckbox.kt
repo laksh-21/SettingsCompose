@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.datastoresettings.uiComponents.internalComponents.* // ktlint-disable no-wildcard-imports
 
 @Composable
-fun SettingsCheckbox(
+internal fun SettingsCheckboxComponent(
     modifier: Modifier = Modifier,
     title: String,
     summary: String? = null,
@@ -47,7 +47,7 @@ fun SettingsCheckbox(
 }
 
 @Composable
-fun SettingsCheckbox(
+internal fun SettingsCheckboxComponent(
     modifier: Modifier = Modifier,
     title: @Composable () -> Unit,
     summary: @Composable (() -> Unit)? = null,
@@ -77,9 +77,11 @@ fun SettingsCheckbox(
 @Preview(showBackground = true)
 @Composable
 fun BasicCheckbox() {
-    SettingsCheckbox(
-        title = "Hello!",
-        summary = "Summary..",
-        icon = Icons.Filled.ArrowBack
-    )
+    SettingsScreen {
+        SettingsCheckboxComponent(
+            title = "Hello!",
+            summary = "Summary..",
+            icon = Icons.Filled.ArrowBack
+        )
+    }
 }
