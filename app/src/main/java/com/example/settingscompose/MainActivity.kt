@@ -3,11 +3,10 @@ package com.example.settingscompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.ui.Modifier
+import com.example.datastoresettings.uiComponents.SettingsScreen
 import com.example.settingscompose.ui.theme.SettingsComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -16,23 +15,24 @@ class MainActivity : ComponentActivity() {
         setContent {
             SettingsComposeTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android")
+                SettingsScreen {
+                    SettingsGroup(title = "Group 1") {
+                        SettingsCheckbox(
+                            modifier = Modifier,
+                            title = "Checky Boi",
+                            summary = "It go boop boop",
+                            icon = Icons.Default.Email
+                        )
+                        SettingsList(
+                            modifier = Modifier,
+                            title = "Title",
+                            summary = "Summary",
+                            icon = Icons.Default.Email,
+                            options = listOf("Strings")
+                        )
+                    }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    SettingsComposeTheme {
-        Greeting("Android")
     }
 }

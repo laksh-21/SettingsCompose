@@ -10,7 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.datastoresettings.uiComponents.internalComponents.SettingGroupTitle
 
 @Composable
-fun SettingsGroupComponent(
+internal fun SettingsGroupComponent(
     title: String,
     content: @Composable () -> Unit,
 ) {
@@ -22,7 +22,7 @@ fun SettingsGroupComponent(
 
 @Preview(showBackground = true)
 @Composable
-fun SettingGroupDemo() {
+private fun SettingGroupDemo() {
     SettingsGroupComponent(title = "Demos") {
         SettingsCheckboxComponent(
             title = "Hello!",

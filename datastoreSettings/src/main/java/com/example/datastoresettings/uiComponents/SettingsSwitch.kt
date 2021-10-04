@@ -80,7 +80,7 @@ internal fun SettingsSwitchComponent(
 
 @Preview(showBackground = true)
 @Composable
-fun BasicSwitch() {
+private fun BasicSwitch() {
     SettingsSwitchComponent(
         title = "Hello!",
         summary = "Summary..",

@@ -59,6 +59,15 @@ interface SettingsScreenScope {
         title: String,
         content: @Composable () -> Unit,
     )
+
+    @Composable
+    fun SettingsList(
+        modifier: Modifier,
+        title: String,
+        summary: String?,
+        icon: ImageVector?,
+        options: List<String>,
+    )
 }
 
 internal object SettingsScreenScopeImpl : SettingsScreenScope {
@@ -126,11 +135,28 @@ internal object SettingsScreenScopeImpl : SettingsScreenScope {
     override fun SettingsGroup(title: String, content: @Composable () -> Unit) {
         SettingsGroupComponent(title = title, content = content)
     }
+
+    @Composable
+    override fun SettingsList(
+        modifier: Modifier,
+        title: String,
+        summary: String?,
+        icon: ImageVector?,
+        options: List<String>
+    ) {
+        SettingsListComponent(
+            modifier = modifier,
+            title = title,
+            summary = summary,
+            icon = icon,
+            options = options,
+        )
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun SettingsScreenDemo() {
+private fun SettingsScreenDemo() {
     SettingsScreen {
         SettingsCheckbox(
             modifier = Modifier,

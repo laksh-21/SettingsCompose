@@ -76,7 +76,7 @@ internal fun SettingsCheckboxComponent(
 
 @Preview(showBackground = true)
 @Composable
-fun BasicCheckbox() {
+private fun BasicCheckbox() {
     SettingsScreen {
         SettingsCheckboxComponent(
             title = "Hello!",
