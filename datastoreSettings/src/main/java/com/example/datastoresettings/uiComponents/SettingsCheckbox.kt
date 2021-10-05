@@ -5,14 +5,18 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Icon
 import androidx.compose.material.Surface
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.datastore.preferences.core.Preferences
+import com.example.datastoresettings.datastoreManager.LocalManagerProvider
+import com.example.datastoresettings.datastoreManager.SettingReference
 import com.example.datastoresettings.uiComponents.internalComponents.* // ktlint-disable no-wildcard-imports
+import kotlinx.coroutines.launch
 
 @Composable
 internal fun SettingsCheckboxComponent(
@@ -20,7 +24,19 @@ internal fun SettingsCheckboxComponent(
     title: String,
     summary: String? = null,
     icon: ImageVector? = null,
+    reference: CheckboxReference,
 ) {
+    val datastoreManager = LocalManagerProvider.current
+    val value: Boolean by datastoreManager
+        .getSettingFlow(reference = reference)
+        .collectAsState(initial = false)
+
+    suspend fun editValue() {
+        datastoreManager.setSettingValue(reference.key, value = !value)
+    }
+
+    val scope = rememberCoroutineScope()
+
     Surface {
         Row(
             modifier = modifier.fillMaxWidth(),
@@ -39,7 +55,9 @@ internal fun SettingsCheckboxComponent(
             )
             SettingAction(
                 action = {
-                    Checkbox(checked = true, onCheckedChange = {})
+                    Checkbox(checked = value, onCheckedChange = {
+                        scope.launch { editValue() }
+                    })
                 }
             )
         }
@@ -52,7 +70,19 @@ internal fun SettingsCheckboxComponent(
     title: @Composable () -> Unit,
     summary: @Composable (() -> Unit)? = null,
     icon: @Composable (() -> Unit)? = null,
+    reference: CheckboxReference,
 ) {
+    val datastoreManager = LocalManagerProvider.current
+    val value: Boolean by datastoreManager
+        .getSettingFlow(reference = reference)
+        .collectAsState(initial = false)
+
+    suspend fun editValue() {
+        datastoreManager.setSettingValue(reference.key, value = !value)
+    }
+
+    val scope = rememberCoroutineScope()
+
     Surface {
         Row(
             modifier = modifier.fillMaxWidth(1f),
@@ -67,21 +97,19 @@ internal fun SettingsCheckboxComponent(
             )
             SettingAction(
                 action = {
-                    Checkbox(checked = true, onCheckedChange = {})
+                    Checkbox(checked = value, onCheckedChange = {
+                        scope.launch { editValue() }
+                    })
                 }
             )
         }
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-private fun BasicCheckbox() {
-    SettingsScreen {
-        SettingsCheckboxComponent(
-            title = "Hello!",
-            summary = "Summary..",
-            icon = Icons.Filled.ArrowBack
-        )
-    }
-}
+class CheckboxReference(
+    key: Preferences.Key<Boolean>,
+    defaultValue: Boolean
+) : SettingReference<Boolean>(
+    key = key,
+    defaultValue = defaultValue
+)

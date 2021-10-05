@@ -4,24 +4,27 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Face
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.tooling.preview.Preview
+import com.example.datastoresettings.datastoreManager.DatastoreManager
+import com.example.datastoresettings.datastoreManager.LocalManagerProvider
 
 @Composable
 fun SettingsScreen(
-    content: @Composable SettingsScreenScope.() -> Unit
+    datastoreManager: DatastoreManager,
+    content: @Composable SettingsScreenScope.() -> Unit,
 ) {
-    val scrollState = rememberScrollState()
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(state = scrollState)
-    ) {
-        SettingsScreenScopeImpl.content()
+    CompositionLocalProvider(LocalManagerProvider provides datastoreManager) {
+        val scrollState = rememberScrollState()
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(state = scrollState)
+        ) {
+            SettingsScreenScopeImpl.content()
+        }
     }
 }
 
@@ -32,6 +35,7 @@ interface SettingsScreenScope {
         title: String,
         summary: String?,
         icon: ImageVector?,
+        reference: CheckboxReference,
     )
     @Composable
     fun SettingsCheckbox(
@@ -39,6 +43,7 @@ interface SettingsScreenScope {
         title: @Composable () -> Unit,
         summary: @Composable (() -> Unit)?,
         icon: @Composable (() -> Unit)?,
+        reference: CheckboxReference,
     )
     @Composable
     fun SettingsSwitch(
@@ -76,13 +81,15 @@ internal object SettingsScreenScopeImpl : SettingsScreenScope {
         modifier: Modifier,
         title: String,
         summary: String?,
-        icon: ImageVector?
+        icon: ImageVector?,
+        reference: CheckboxReference,
     ) {
         SettingsCheckboxComponent(
             modifier = modifier,
             title = title,
             summary = summary,
-            icon = icon
+            icon = icon,
+            reference = reference,
         )
     }
 
@@ -91,13 +98,15 @@ internal object SettingsScreenScopeImpl : SettingsScreenScope {
         modifier: Modifier,
         title: @Composable () -> Unit,
         summary: @Composable (() -> Unit)?,
-        icon: @Composable (() -> Unit)?
+        icon: @Composable (() -> Unit)?,
+        reference: CheckboxReference,
     ) {
         SettingsCheckboxComponent(
             modifier = modifier,
             title = title,
             summary = summary,
-            icon = icon
+            icon = icon,
+            reference = reference,
         )
     }
 
@@ -151,38 +160,5 @@ internal object SettingsScreenScopeImpl : SettingsScreenScope {
             icon = icon,
             options = options,
         )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun SettingsScreenDemo() {
-    SettingsScreen {
-        SettingsCheckbox(
-            modifier = Modifier,
-            title = "Hi",
-            summary = "Summary!",
-            icon = Icons.Default.Face
-        )
-        SettingsGroup(title = "Group 1") {
-            SettingsCheckbox(
-                modifier = Modifier,
-                title = "Hi",
-                summary = "Summary!",
-                icon = Icons.Default.Face
-            )
-            SettingsCheckbox(
-                modifier = Modifier,
-                title = "Hi",
-                summary = "Summary!",
-                icon = Icons.Default.Face
-            )
-            SettingsCheckbox(
-                modifier = Modifier,
-                title = "Hi",
-                summary = "Summary!",
-                icon = Icons.Default.Face
-            )
-        }
     }
 }
