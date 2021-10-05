@@ -14,11 +14,12 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.example.datastoresettings.datastoreManager.DatastoreManager
 import com.example.datastoresettings.uiComponents.CheckboxReference
 import com.example.datastoresettings.uiComponents.SettingsScreen
+import com.example.datastoresettings.uiComponents.SwitchReference
+import com.example.settingscompose.References.checkboxReference
+import com.example.settingscompose.References.switchReference
 import com.example.settingscompose.ui.theme.SettingsComposeTheme
 
 val Context.datastore: DataStore<Preferences> by preferencesDataStore(name = "settings")
-
-val checkboxReference = CheckboxReference(key = booleanPreferencesKey(name = "checkBoi"), defaultValue = false)
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,21 +36,21 @@ class MainActivity : ComponentActivity() {
                             icon = Icons.Default.Email,
                             reference = checkboxReference,
                         )
-                        SettingsList(
+                        SettingsSwitch(
                             modifier = Modifier,
-                            title = "Title",
-                            summary = "Summary",
+                            title = "Switchy Boi",
+                            summary = "It go switch switch",
                             icon = Icons.Default.Email,
-                            options = listOf(
-                                "Strings",
-                                "Hey",
-                                "Hello",
-                                "Hi"
-                            )
+                            reference = switchReference,
                         )
                     }
                 }
             }
         }
     }
+}
+
+object References {
+    val checkboxReference = CheckboxReference(key = booleanPreferencesKey(name = "checkBoi"), defaultValue = false)
+    val switchReference = SwitchReference(key = booleanPreferencesKey(name = "switchBoi"), defaultValue = false)
 }

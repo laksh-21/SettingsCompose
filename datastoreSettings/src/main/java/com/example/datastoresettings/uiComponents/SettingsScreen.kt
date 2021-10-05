@@ -51,13 +51,15 @@ interface SettingsScreenScope {
         title: String,
         summary: String?,
         icon: ImageVector?,
+        reference: SwitchReference,
     )
     @Composable
-    fun SettingsSwitchComponent(
+    fun SettingsSwitch(
         modifier: Modifier,
         title: @Composable () -> Unit,
         summary: @Composable (() -> Unit)?,
         icon: @Composable (() -> Unit)?,
+        reference: SwitchReference,
     )
     @Composable
     fun SettingsGroup(
@@ -115,28 +117,32 @@ internal object SettingsScreenScopeImpl : SettingsScreenScope {
         modifier: Modifier,
         title: String,
         summary: String?,
-        icon: ImageVector?
+        icon: ImageVector?,
+        reference: SwitchReference
     ) {
         SettingsSwitchComponent(
             modifier = modifier,
             title = title,
             summary = summary,
             icon = icon,
+            reference = reference,
         )
     }
 
     @Composable
-    override fun SettingsSwitchComponent(
+    override fun SettingsSwitch(
         modifier: Modifier,
-        title: () -> Unit,
-        summary: (() -> Unit)?,
-        icon: (() -> Unit)?
+        title: @Composable () -> Unit,
+        summary: @Composable (() -> Unit)?,
+        icon: @Composable (() -> Unit)?,
+        reference: SwitchReference,
     ) {
         SettingsSwitchComponent(
             modifier = modifier,
             title = title,
             summary = summary,
             icon = icon,
+            reference = reference,
         )
     }
 

@@ -1,5 +1,6 @@
 package com.example.datastoresettings.uiComponents
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Checkbox
@@ -39,7 +40,9 @@ internal fun SettingsCheckboxComponent(
 
     Surface {
         Row(
-            modifier = modifier.fillMaxWidth(),
+            modifier = modifier
+                .fillMaxWidth()
+                .clickable { scope.launch { editValue() } },
             verticalAlignment = Alignment.CenterVertically,
         ) {
             icon?.let {
@@ -85,7 +88,9 @@ internal fun SettingsCheckboxComponent(
 
     Surface {
         Row(
-            modifier = modifier.fillMaxWidth(1f),
+            modifier = modifier
+                .fillMaxWidth(1f)
+                .clickable { scope.launch { editValue() } },
             verticalAlignment = Alignment.CenterVertically
         ) {
             icon?.let {
