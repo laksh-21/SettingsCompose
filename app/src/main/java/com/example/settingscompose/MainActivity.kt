@@ -10,12 +10,17 @@ import androidx.compose.ui.Modifier
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.datastoresettings.datastoreManager.DatastoreManager
 import com.example.datastoresettings.uiComponents.CheckboxReference
+import com.example.datastoresettings.uiComponents.ListReference
 import com.example.datastoresettings.uiComponents.SettingsScreen
 import com.example.datastoresettings.uiComponents.SwitchReference
 import com.example.settingscompose.References.checkboxReference
+import com.example.settingscompose.References.listReference
+import com.example.settingscompose.References.optionsKeys
+import com.example.settingscompose.References.optionsTitles
 import com.example.settingscompose.References.switchReference
 import com.example.settingscompose.ui.theme.SettingsComposeTheme
 
@@ -43,6 +48,15 @@ class MainActivity : ComponentActivity() {
                             icon = Icons.Default.Email,
                             reference = switchReference,
                         )
+                        SettingsList(
+                            modifier = Modifier,
+                            title = "Listy Boi",
+                            summary = "It go click click",
+                            icon = Icons.Default.Email,
+                            optionsTitles = optionsTitles,
+                            optionsKeys = optionsKeys,
+                            reference = listReference
+                        )
                     }
                 }
             }
@@ -53,4 +67,16 @@ class MainActivity : ComponentActivity() {
 object References {
     val checkboxReference = CheckboxReference(key = booleanPreferencesKey(name = "checkBoi"), defaultValue = false)
     val switchReference = SwitchReference(key = booleanPreferencesKey(name = "switchBoi"), defaultValue = false)
+
+    val optionsTitles = listOf(
+        "Option A",
+        "Option B",
+        "Option C",
+    )
+    val optionsKeys = listOf(
+        "option_a_key",
+        "option_b_key",
+        "option_c_key",
+    )
+    val listReference = ListReference(key = stringPreferencesKey(name = "listBoi"), defaultValue = optionsKeys[0])
 }

@@ -5,15 +5,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Icon
 import androidx.compose.material.Surface
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.datastore.preferences.core.Preferences
+import com.example.datastoresettings.datastoreManager.SettingReference
 import com.example.datastoresettings.uiComponents.internalComponents.* // ktlint-disable no-wildcard-imports
 
 @Composable
@@ -22,7 +21,9 @@ internal fun SettingsListComponent(
     title: String,
     summary: String? = null,
     icon: ImageVector? = null,
-    options: List<String>,
+    optionsTitles: List<String>,
+    optionsKeys: List<String>,
+    reference: ListReference,
 ) {
     val showDialog = remember { mutableStateOf(false) }
 
@@ -57,16 +58,16 @@ internal fun SettingsListComponent(
     SettingListAlertDialog(
         showDialog = showDialog.value,
         onDismiss = { onDismiss() },
-        options = options
+        optionsTitles = optionsTitles,
+        optionsKeys = optionsKeys,
+        reference = reference,
     )
 }
 
-@Preview
-@Composable
-private fun ListDemo() {
-    SettingsListComponent(
-        title = "Title Boi",
-        options = listOf("hoi!"),
-        icon = Icons.Default.Email,
-    )
-}
+class ListReference(
+    key: Preferences.Key<String>,
+    defaultValue: String
+) : SettingReference<String>(
+    key = key,
+    defaultValue = defaultValue
+)

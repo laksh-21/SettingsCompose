@@ -73,7 +73,9 @@ interface SettingsScreenScope {
         title: String,
         summary: String?,
         icon: ImageVector?,
-        options: List<String>,
+        optionsTitles: List<String>,
+        optionsKeys: List<String>,
+        reference: ListReference,
     )
 }
 
@@ -157,14 +159,18 @@ internal object SettingsScreenScopeImpl : SettingsScreenScope {
         title: String,
         summary: String?,
         icon: ImageVector?,
-        options: List<String>
+        optionsTitles: List<String>,
+        optionsKeys: List<String>,
+        reference: ListReference,
     ) {
         SettingsListComponent(
             modifier = modifier,
             title = title,
             summary = summary,
             icon = icon,
-            options = options,
+            optionsTitles = optionsTitles,
+            optionsKeys = optionsKeys,
+            reference = reference,
         )
     }
 }
