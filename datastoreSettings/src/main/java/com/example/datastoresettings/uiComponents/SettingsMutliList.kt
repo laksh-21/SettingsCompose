@@ -69,6 +69,58 @@ fun SettingsMultiListComponent(
     )
 }
 
+@Composable
+fun SettingsMultiListComponent(
+    modifier: Modifier = Modifier,
+    title: @Composable () -> Unit,
+    summary: @Composable (() -> Unit)? = null,
+    icon: @Composable (() -> Unit)? = null,
+    optionsTitles: List<String>,
+    optionsKeys: List<String>,
+    reference: MultiListReference,
+) {
+    val showDialog = remember { mutableStateOf(false) }
+
+    fun onClickRow() {
+        showDialog.value = true
+    }
+
+    fun onDismiss() {
+        showDialog.value = false
+    }
+
+    Surface {
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
+                .clickable { onClickRow() },
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            icon?.let {
+                SettingIcon(icon = icon)
+            }
+            SettingDescription(
+                title = title,
+                summary = summary,
+            )
+        }
+    }
+
+    SettingMultiListAlertDialog(
+        showDialog = showDialog.value,
+        onDismiss = { onDismiss() },
+        optionsTitles = optionsTitles,
+        optionsKeys = optionsKeys,
+        reference = reference,
+    )
+}
+
+/**
+ * Extends [SettingReference] to define a reference to a MultiSelectList Setting.
+ *
+ * @param key A string [Set] [Preferences.Key] for this setting
+ * @param defaultValue A string [Set] value for when the datastore does not contain given setting.
+ * */
 class MultiListReference(
     key: Preferences.Key<Set<String>>,
     defaultValue: Set<String>,

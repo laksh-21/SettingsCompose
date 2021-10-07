@@ -115,6 +115,12 @@ internal fun SettingsSwitchComponent(
     }
 }
 
+/**
+ * Extends [SettingReference] to define a reference to a Switch Setting.
+ *
+ * @param key A [Boolean] [Preferences.Key] for this setting
+ * @param defaultValue A [Boolean] value for when the datastore does not contain given setting.
+ * */
 class SwitchReference(
     key: Preferences.Key<Boolean>,
     defaultValue: Boolean

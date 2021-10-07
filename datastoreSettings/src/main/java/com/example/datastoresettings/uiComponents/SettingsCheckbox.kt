@@ -111,6 +111,12 @@ internal fun SettingsCheckboxComponent(
     }
 }
 
+/**
+ * Extends [SettingReference] to define a reference to a Checkbox Setting.
+ *
+ * @param key A [Boolean] [Preferences.Key] for this setting
+ * @param defaultValue A [Boolean] value for when the datastore does not contain given setting.
+ * */
 class CheckboxReference(
     key: Preferences.Key<Boolean>,
     defaultValue: Boolean

@@ -92,15 +92,11 @@ internal fun SettingsListComponent(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             icon?.let {
-                icon()
+                SettingIcon(icon = icon)
             }
             SettingDescription(
                 title = title,
-                {
-                    summary?.let {
-                        summary()
-                    }
-                }
+                summary = summary,
             )
         }
     }
@@ -113,6 +109,12 @@ internal fun SettingsListComponent(
     )
 }
 
+/**
+ * Extends [SettingReference] to define a reference to a List Setting.
+ *
+ * @param key A [String] [Preferences.Key] for this setting
+ * @param defaultValue A [String] value for when the datastore does not contain given setting.
+ * */
 class ListReference(
     key: Preferences.Key<String>,
     defaultValue: String
