@@ -11,14 +11,15 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.datastoresettings.datastoreManager.DatastoreManager
-import com.example.datastoresettings.uiComponents.CheckboxReference
-import com.example.datastoresettings.uiComponents.ListReference
-import com.example.datastoresettings.uiComponents.SettingsScreen
-import com.example.datastoresettings.uiComponents.SwitchReference
+import com.example.datastoresettings.uiComponents.* // ktlint-disable no-wildcard-imports
 import com.example.settingscompose.References.checkboxReference
 import com.example.settingscompose.References.listReference
+import com.example.settingscompose.References.multiListReference
+import com.example.settingscompose.References.multiOptionsKeys
+import com.example.settingscompose.References.multiOptionsTitles
 import com.example.settingscompose.References.optionsKeys
 import com.example.settingscompose.References.optionsTitles
 import com.example.settingscompose.References.switchReference
@@ -57,6 +58,15 @@ class MainActivity : ComponentActivity() {
                             optionsKeys = optionsKeys,
                             reference = listReference
                         )
+                        SettingsMultiList(
+                            modifier = Modifier,
+                            title = "Multi Listy Boi",
+                            summary = "It also go Click click",
+                            icon = Icons.Default.Email,
+                            optionsTitles = multiOptionsTitles,
+                            optionsKeys = multiOptionsKeys,
+                            reference = multiListReference
+                        )
                     }
                 }
             }
@@ -79,4 +89,21 @@ object References {
         "option_c_key",
     )
     val listReference = ListReference(key = stringPreferencesKey(name = "listBoi"), defaultValue = optionsKeys[0])
+
+    val multiOptionsTitles = listOf(
+        "Multi Option A",
+        "Multi Option B",
+        "Multi Option C",
+    )
+    val multiOptionsKeys = listOf(
+        "multi_options_a_key",
+        "multi_options_b_key",
+        "multi_options_c_key",
+    )
+    val multiListReference = MultiListReference(
+        key = stringSetPreferencesKey(name = "multiListBoi"),
+        defaultValue = setOf(
+            multiOptionsKeys[0]
+        )
+    )
 }

@@ -88,6 +88,17 @@ interface SettingsScreenScope {
         optionsKeys: List<String>,
         reference: ListReference,
     )
+
+    @Composable
+    fun SettingsMultiList(
+        modifier: Modifier,
+        title: String,
+        summary: String?,
+        icon: ImageVector?,
+        optionsTitles: List<String>,
+        optionsKeys: List<String>,
+        reference: MultiListReference,
+    )
 }
 
 internal object SettingsScreenScopeImpl : SettingsScreenScope {
@@ -203,6 +214,26 @@ internal object SettingsScreenScopeImpl : SettingsScreenScope {
             optionsTitles = optionsTitles,
             optionsKeys = optionsKeys,
             reference = reference,
+        )
+    }
+
+    @Composable
+    override fun SettingsMultiList(
+        modifier: Modifier,
+        title: String,
+        summary: String?,
+        icon: ImageVector?,
+        optionsTitles: List<String>,
+        optionsKeys: List<String>,
+        reference: MultiListReference
+    ) {
+        SettingsMultiListComponent(
+            title = title,
+            summary = summary,
+            icon = icon,
+            optionsTitles = optionsTitles,
+            optionsKeys = optionsKeys,
+            reference = reference
         )
     }
 }
