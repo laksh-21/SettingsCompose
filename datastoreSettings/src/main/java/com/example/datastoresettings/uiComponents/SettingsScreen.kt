@@ -77,6 +77,17 @@ interface SettingsScreenScope {
         optionsKeys: List<String>,
         reference: ListReference,
     )
+
+    @Composable
+    fun SettingsList(
+        modifier: Modifier,
+        title: @Composable () -> Unit,
+        summary: @Composable (() -> Unit)?,
+        icon: @Composable (() -> Unit)?,
+        optionsTitles: List<String>,
+        optionsKeys: List<String>,
+        reference: ListReference,
+    )
 }
 
 internal object SettingsScreenScopeImpl : SettingsScreenScope {
@@ -162,6 +173,27 @@ internal object SettingsScreenScopeImpl : SettingsScreenScope {
         optionsTitles: List<String>,
         optionsKeys: List<String>,
         reference: ListReference,
+    ) {
+        SettingsListComponent(
+            modifier = modifier,
+            title = title,
+            summary = summary,
+            icon = icon,
+            optionsTitles = optionsTitles,
+            optionsKeys = optionsKeys,
+            reference = reference,
+        )
+    }
+
+    @Composable
+    override fun SettingsList(
+        modifier: Modifier,
+        title: @Composable () -> Unit,
+        summary: @Composable (() -> Unit)?,
+        icon: @Composable (() -> Unit)?,
+        optionsTitles: List<String>,
+        optionsKeys: List<String>,
+        reference: ListReference
     ) {
         SettingsListComponent(
             modifier = modifier,

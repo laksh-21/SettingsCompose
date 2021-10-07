@@ -64,6 +64,55 @@ internal fun SettingsListComponent(
     )
 }
 
+@Composable
+internal fun SettingsListComponent(
+    modifier: Modifier,
+    title: @Composable () -> Unit,
+    summary: @Composable (() -> Unit)? = null,
+    icon: @Composable (() -> Unit)? = null,
+    optionsTitles: List<String>,
+    optionsKeys: List<String>,
+    reference: ListReference,
+) {
+    val showDialog = remember { mutableStateOf(false) }
+
+    fun onClickRow() {
+        showDialog.value = true
+    }
+
+    fun onDismiss() {
+        showDialog.value = false
+    }
+
+    Surface {
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
+                .clickable { onClickRow() },
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            icon?.let {
+                icon()
+            }
+            SettingDescription(
+                title = title,
+                {
+                    summary?.let {
+                        summary()
+                    }
+                }
+            )
+        }
+    }
+    SettingListAlertDialog(
+        showDialog = showDialog.value,
+        onDismiss = { onDismiss() },
+        optionsTitles = optionsTitles,
+        optionsKeys = optionsKeys,
+        reference = reference,
+    )
+}
+
 class ListReference(
     key: Preferences.Key<String>,
     defaultValue: String
