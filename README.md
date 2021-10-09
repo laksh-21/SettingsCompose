@@ -3,6 +3,8 @@
 
 <p align="center"><a href="#screenshots">Screenshots</a> &bull; <a href="#description">Description</a> &bull; <a href="#features">Features</a> &bull; <a href="#libraries">Libraries Used</a>
 
+[![](https://jitpack.io/v/laksh-21/SettingsCompose.svg)](https://jitpack.io/#laksh-21/SettingsCompose)
+
 ## Screenshots
 Coming Soon
 
@@ -24,4 +26,22 @@ deprecated, this implementation solves both these issues by using Preferences Da
 * [Preferences Datastore](https://developer.android.com/topic/libraries/architecture/datastore)- Data Persistence
 
 ### Project Setup
-Coming Soon
+
+To add Settings-Compose to your project:
+Add it in your root build.gradle at the end of repositories:
+
+    allprojects {
+        repositories {
+            ...
+            maven { url 'https://jitpack.io' }
+        }
+    }
+
+
+Add the dependency:
+
+    dependencies {
+        implementation 'com.github.laksh-21:SettingsCompose:0.1.0'
+    }
+
+
