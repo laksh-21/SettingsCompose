@@ -1,7 +1,7 @@
 <h2 align="center"><b>SettingsCompose</b></h2>
 <h4 align="center">A Jetpack Compose implementation of Settings Fragment</h4>
 
-<p align="center"><a href="#screenshots">Screenshots</a> &bull; <a href="#description">Description</a> &bull; <a href="#features">Features</a> &bull; <a href="#libraries">Libraries Used</a>
+<p align="center"><a href="#screenshots">Screenshots</a> &bull; <a href="#description">Description</a> &bull; <a href="#features">Features</a> &bull; <a href="#libraries">Libraries Used</a> &bull; <a href="#project setup">Project Setup</a>
 
 [![](https://jitpack.io/v/laksh-21/SettingsCompose.svg)](https://jitpack.io/#laksh-21/SettingsCompose)
 
